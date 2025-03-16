@@ -21,5 +21,8 @@ namespace CTRLightsPublicAPI.Data.Models
 
         [Required]
         public char LightStatus { get; set; }
+
+        [Required]
+        public string Busyness { get; set; } = "L"; //L - low, M - mid, H - high
     }
 }
