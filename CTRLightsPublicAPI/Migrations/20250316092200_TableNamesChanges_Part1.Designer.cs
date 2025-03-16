@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CTRLightsPublicAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250316013508_Initial")]
-    partial class Initial
+    [Migration("20250316092200_TableNamesChanges_Part1")]
+    partial class TableNamesChanges_Part1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -24,6 +24,29 @@ namespace CTRLightsPublicAPI.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.AdminUsers", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Key")
+                        .IsRequired()
+                        .HasMaxLength(16)
+                        .HasColumnType("character varying(16)");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AdminUsers");
+                });
 
             modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.AirQuality", b =>
                 {
@@ -44,7 +67,7 @@ namespace CTRLightsPublicAPI.Migrations
                     b.ToTable("AirQuality");
                 });
 
-            modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.TrafficLights", b =>
+            modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.EspDevice", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -52,26 +75,30 @@ namespace CTRLightsPublicAPI.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("FreeLaneStatus")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("Lane")
+                    b.Property<int>("AirQualityId")
                         .HasColumnType("integer");
 
-                    b.Property<char>("LightStatus")
-                        .HasColumnType("character(1)");
-
-                    b.Property<string>("Name")
+                    b.Property<string>("MacAddress")
                         .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<int>("TimeSpan")
-                        .HasColumnType("integer");
+                        .HasMaxLength(17)
+                        .HasColumnType("character varying(17)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("TrafficLights");
+                    b.HasIndex("AirQualityId");
+
+                    b.ToTable("EspDevice");
+                });
+
+            modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.EspDevice", b =>
+                {
+                    b.HasOne("CTRLightsPublicAPI.Data.Models.AirQuality", "airQuality")
+                        .WithMany()
+                        .HasForeignKey("AirQualityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("airQuality");
                 });
 #pragma warning restore 612, 618
         }

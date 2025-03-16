@@ -24,6 +24,8 @@ namespace CTRLightsPublicAPI.Data
         // Add your DbSets (Tables)
         public DbSet<TrafficLights> TrafficLights { get; set; }
         public DbSet<AirQuality> AirQuality { get; set; }
+        public DbSet<EspDevice> EspDevice { get; set; }
+        public DbSet<AdminUsers> AdminUsers { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -25,7 +25,7 @@ namespace CTRLightsPublicAPI.Controllers
             }
         }
 
-        [HttpGet("getAirQuality")]
+        [HttpGet("getAirQualities")]
         public async Task<ActionResult> GetAirQuality()
         {
             List<AirQuality> airQuality = [.. _context.AirQuality];
@@ -37,6 +37,36 @@ namespace CTRLightsPublicAPI.Controllers
             else
             {
                 return Ok(new { AirQualityList = airQuality, message = "Success!" });
+            }
+        }
+
+        [HttpGet("getAdminsProfiles")]
+        public async Task<ActionResult> GetAdminsProfiles()
+        {
+            List<AdminUsers> adminUsers = [.. _context.AdminUsers];
+
+            if (adminUsers.Count <= 0)
+            {
+                return Ok(new { AdminUsersList = adminUsers, message = "No information registered!" });
+            }
+            else
+            {
+                return Ok(new { AdminUsersList = adminUsers, message = "Success!" });
+            }
+        }
+
+        [HttpGet("getEspDevices")]
+        public async Task<ActionResult> GetEspDevices()
+        {
+            List<EspDevice> espDevices = [.. _context.EspDevice];
+
+            if (espDevices.Count <= 0)
+            {
+                return Ok(new { EspDevicesList = espDevices, message = "No information registered!" });
+            }
+            else
+            {
+                return Ok(new { EspDevicesList = espDevices, message = "Success!" });
             }
         }
     }
