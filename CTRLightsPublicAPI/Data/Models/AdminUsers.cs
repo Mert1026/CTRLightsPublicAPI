@@ -4,6 +4,7 @@ namespace CTRLightsPublicAPI.Data.Models
 {
     public class AdminUsers
     {
+        //Key value
         [Key]
         public int Id { get; set; }
 
