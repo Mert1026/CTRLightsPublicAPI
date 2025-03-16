@@ -17,7 +17,7 @@ namespace CTRLightsPublicAPI.Controllers
 
             if (trafficLights.Count <= 0)
             {
-                return Ok(new { TrafficLightsList = trafficLights, message = "No traffic lights registered!" });
+                return Ok(new { TrafficLightsList = trafficLights, message = "No information registered!" });
             }
             else
             {
