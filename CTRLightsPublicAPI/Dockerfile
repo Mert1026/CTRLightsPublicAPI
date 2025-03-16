@@ -1,16 +1,16 @@
 # Use official .NET SDK image for build
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
-COPY . .
+COPY . . 
 
 # Use SDK image to build the app
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
-COPY ["CTRLightsPublicAPI.csproj", "./"]
+COPY ["CTRLightsPublicAPI/CTRLightsPublicAPI/CTRLightsPublicAPI.csproj", "./"]
 RUN dotnet restore
 
 # Copy everything and build
-COPY . .
+COPY . . 
 RUN dotnet build --no-restore -c Release -o /app/build
 RUN dotnet publish -c Release -o /app/publish
 
@@ -19,3 +19,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=build /app/publish .
 ENTRYPOINT ["dotnet", "CTRLightsPublicAPI.dll"]
+
