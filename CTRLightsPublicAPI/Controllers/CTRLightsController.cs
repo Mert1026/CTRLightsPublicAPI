@@ -69,5 +69,35 @@ namespace CTRLightsPublicAPI.Controllers
                 return Ok(new { EspDevicesList = espDevices, message = "Success!" });
             }
         }
+
+        [HttpGet("getLoginVerification/{key}")]
+        public async Task<ActionResult> GetLoginVerification(string key)
+        {
+            AdminUsers? user = _context.AdminUsers.FirstOrDefault(a => a.Key == key);
+
+            if (user == null)
+            {
+                return Ok(new { Check = false });
+            }
+            else
+            {
+                return Ok(new { Check = true});
+            }
+        }
+
+        [HttpGet("getByUserName/{userName}")]
+        public async Task<ActionResult> GetByUserName(string userName)
+        {
+            AdminUsers? user = _context.AdminUsers.FirstOrDefault(a => a.Username == userName);
+
+            if (user == null)
+            {
+                return Ok(null);
+            }
+            else
+            {
+                return Ok(new { User = user });
+            }
+        }
     }
 }
