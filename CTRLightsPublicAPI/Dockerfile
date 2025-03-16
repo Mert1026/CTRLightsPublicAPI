@@ -21,4 +21,4 @@ COPY --from=build /app/out ./
 EXPOSE 5000
 
 # Define the entrypoint
-ENTRYPOINT ["dotnet", "MyApi.dll"]  # Replace "MyApi.dll" with your actual .dll file name
+ENTRYPOINT ["dotnet", "CTRLightsPublicAPI.dll"]  # Replace "MyApi.dll" with your actual .dll file name
