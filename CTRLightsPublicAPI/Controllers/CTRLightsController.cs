@@ -1,17 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using System;
-using Microsoft.EntityFrameworkCore;
-using Npgsql.EntityFrameworkCore;
 using CTRLightsPublicAPI.Data.Models;
-using Npgsql;
 using CTRLightsPublicAPI.Data;
 
 namespace CTRLightsPublicAPI.Controllers
 {
     [Route("api/ctrlights")]
     [ApiController]
-    public class CTRLightsController : Controller
+    public class CTRLightsController : ControllerBase
     {
         private AppDbContext _context = new AppDbContext();
 
