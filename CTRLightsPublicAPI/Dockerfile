@@ -3,12 +3,14 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 WORKDIR /src
 
-# Copy the .csproj file and restore the dependencies
-COPY ./CTRLightsPublicAPI.csproj ./ 
+# Copy the .csproj file and restore dependencies
+COPY CTRLightsPublicAPI/CTRLightsPublicAPI.csproj ./ 
 RUN dotnet restore
 
+# Copy everything else inside the project folder
+COPY CTRLightsPublicAPI/. ./
+
 # Publish the app
-COPY . .
 RUN dotnet publish -c Release -o /app
 
 # Use the .NET runtime image to serve the app
@@ -17,6 +19,7 @@ WORKDIR /app
 COPY --from=build /app .
 
 ENTRYPOINT ["dotnet", "CTRLightsPublicAPI.dll"]
+
 
 
 
