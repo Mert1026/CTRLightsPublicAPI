@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CTRLightsPublicAPI.Data.Models
 {
@@ -12,5 +13,10 @@ namespace CTRLightsPublicAPI.Data.Models
 
         [Required]
         public double Amount { get; set; }
+
+        [Required]
+        [ForeignKey(nameof(EspDevice))]
+        public int EspDeviceId { get; set; }
+        public EspDevice EspDevice { get; set; }
     }
 }

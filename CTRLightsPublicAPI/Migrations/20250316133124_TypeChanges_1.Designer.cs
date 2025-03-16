@@ -3,6 +3,7 @@ using System;
 using CTRLightsPublicAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace CTRLightsPublicAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250316133124_TypeChanges_1")]
+    partial class TypeChanges_1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -85,35 +88,6 @@ namespace CTRLightsPublicAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("EspDevice");
-                });
-
-            modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.TrafficLights", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("FreeLaneStatus")
-                        .HasColumnType("boolean");
-
-                    b.Property<int>("Lane")
-                        .HasColumnType("integer");
-
-                    b.Property<char>("LightStatus")
-                        .HasColumnType("character(1)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<TimeSpan>("TimeSpan")
-                        .HasColumnType("interval");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("TrafficLights");
                 });
 
             modelBuilder.Entity("CTRLightsPublicAPI.Data.Models.AirQuality", b =>

@@ -12,9 +12,6 @@ namespace CTRLightsPublicAPI.Data.Models
         [StringLength(17)]
         public string MacAddress { get; set; } = string.Empty;
 
-        [Required]
-        [ForeignKey(nameof(airQuality))]
-        public int AirQualityId { get; set; }
-        public AirQuality airQuality { get; set; }
+
     }
 }

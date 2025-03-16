@@ -11,10 +11,10 @@ namespace CTRLightsPublicAPI.Data.Models
         public string Name { get; set; }
 
         [Required]
-        public string FreeLaneStatus { get; set; }
+        public bool FreeLaneStatus { get; set; }
 
         [Required]
-        public int TimeSpan { get; set; }
+        public TimeSpan TimeSpan { get; set; }
 
         [Required]
         public int Lane { get; set; }
